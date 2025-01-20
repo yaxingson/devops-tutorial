@@ -92,7 +92,6 @@ Gitlab runner executor：
 - Docker
 - Kubernetes
 
-
 ```yml
 # .gitlab-ci.yml
 stages:
@@ -114,7 +113,6 @@ format:
   script:
     - echo "foramt code"
   
-
 build:
   stage: build
   tags:
