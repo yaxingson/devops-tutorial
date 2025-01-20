@@ -99,6 +99,22 @@ stages:
   - build
   - deploy
 
+variables:
+  DOMAIN: example.com
+
+before_script:
+  - echo "pipeline start"
+
+install:
+  stage: .pre
+  script:
+    - echo ""
+
+format:
+  script:
+    - echo "foramt code"
+  
+
 build:
   stage: build
   tags:
@@ -110,10 +126,24 @@ build:
 
 deploy:
   stage: build
+  retry:
+    max: 1
+    when:
+      - script_failure
   only:
     - main
   script:
     - echo "start deploy"
+
+clean:
+  stage: .post
+  when: delayed
+  start_in: "10"
+  script:
+    - echo "clear cache"
+
+after_script:
+  - echo "pipeline end"
 
 ```
 
